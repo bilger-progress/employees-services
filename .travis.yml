@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 8
+before_install:
+  - cd ./employees-services/
+  - cd ./functions/
+install: 
+  - npm install -g firebase-tools
+  - npm install
+script:
+  - npm test
+after_success:
+  - npm run-script deploy
+branches:
+  only:
+  - master
