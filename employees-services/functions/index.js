@@ -16,7 +16,7 @@ function initializeFirebaseAdminSDK(firebaseAdminSDKConfig) {
         databaseURL: "https://employees-70f8e.firebaseio.com"
     });
 }
-initializeFirebaseAdminSDK(firebase.config().admin);
+initializeFirebaseAdminSDK(functions.config().admin);
 
 exports.getAll = functions.https.onRequest((request, response) =>
     cors(request, response, () => handleHTTPS(request, response, getAll)));
