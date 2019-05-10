@@ -2,12 +2,10 @@
 
 const admin = require("firebase-admin");
 
-const data = require("./data");
-
 module.exports = (request) =>
     new Promise((resolve, reject) =>
         admin.auth()
             .verifyIdToken(request.get("Authorization").split("Bearer ")[1])
-            .then(() => resolve(data.all))
-            .catch(() => reject(new Error("Unauthorized"))));
-
+            .then(() => admin.database().ref("employees").once("value"))
+            .then((employees) => resolve(employees.val()))
+            .catch((error) => reject(error)));
