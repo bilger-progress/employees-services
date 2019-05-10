@@ -2,11 +2,13 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
+    "test-prod": "TEST_USERNAME=$TEST_USERNAME && TEST_PASSWORD=$TEST_PASSWORD && eslint . && mocha --recursive",
+    "test-dev": "eslint . && mocha --recursive",
     "lint": "eslint .",
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only functions --token $FIREBASE_TOKEN",
     "logs": "firebase functions:log"
   },
   "dependencies": {
@@ -16,7 +18,10 @@
   },
   "devDependencies": {
     "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0"
+    "eslint-plugin-promise": "^3.6.0",
+    "mocha": "^6.1.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   },
   "private": true,
   "engines": {
