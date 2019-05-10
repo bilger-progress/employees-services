@@ -7,8 +7,8 @@ const getAll = require("../../src/getAll");
 const configs = require("../shared/configs");
 
 const TEST_USER = {
-    email: '',
-    pw: ''
+    email: null,
+    pw: null
 };
 
 describe("Integration tests for the 'getAll' function.", () =>
@@ -18,8 +18,8 @@ describe("Integration tests for the 'getAll' function.", () =>
                 method: "POST",
                 uri: configs.IDENTITY_SERVICE + '?key=' + configs.API_KEY,
                 body: {
-                    email: TEST_USER.email,
-                    password: TEST_USER.pw,
+                    email: TEST_USER.email || process.env.TEST_USERNAME,
+                    password: TEST_USER.pw || process.env.TEST_PASSWORD,
                     returnSecureToken: true
                 },
                 json: true,
