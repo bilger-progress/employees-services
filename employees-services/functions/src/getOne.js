@@ -9,7 +9,6 @@ module.exports = (request) =>
             .then(() => admin.database().ref("employees").child((request.query.id) - 1).once("value"))
             .then((employeeSnap) => employeeSnap.val())
             .then(employeeVal => resolve({
-                // eslint-disable-next-line
                 ...employeeVal,
                 age: `${employeeVal.first_name}'s age`,
                 birth_date: `${employeeVal.first_name}'s birth date`,
