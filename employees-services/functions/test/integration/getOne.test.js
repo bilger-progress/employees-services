@@ -6,11 +6,6 @@ const rp = require("request-promise");
 const getOne = require("../../src/getOne");
 const configs = require("../shared/configs");
 
-const TEST_USER = {
-    email: null,
-    pw: null
-};
-
 describe("Integration tests for the 'getOne' function.", () =>
     describe("Should test getting an employee from the backend service.", () =>
         it("Will fetch the employee, and verify that the object has properties.", () =>
@@ -18,8 +13,8 @@ describe("Integration tests for the 'getOne' function.", () =>
                 method: "POST",
                 uri: configs.IDENTITY_SERVICE + '?key=' + configs.API_KEY,
                 body: {
-                    email: TEST_USER.email || process.env.TEST_USERNAME,
-                    password: TEST_USER.pw || process.env.TEST_PASSWORD,
+                    email: configs.TEST_USER.EMAIL || process.env.TEST_USERNAME,
+                    password: configs.TEST_USER.PASSWORD || process.env.TEST_PASSWORD,
                     returnSecureToken: true
                 },
                 json: true,
@@ -38,6 +33,6 @@ describe("Integration tests for the 'getOne' function.", () =>
                 }))
                 .then(serviceResponse => assert.notEqual(Object.keys(serviceResponse).length, 0))
                 .catch(error => assert.fail(error))
-        )
+        ).timeout(10000)
     )
 );

@@ -6,11 +6,6 @@ const rp = require("request-promise");
 const getAll = require("../../src/getAll");
 const configs = require("../shared/configs");
 
-const TEST_USER = {
-    email: null,
-    pw: null
-};
-
 describe("Integration tests for the 'getAll' function.", () =>
     describe("Should test getting all the employees from the backend service.", () =>
         it("Will fetch all the employees, and verify that the response array length is greater than zero.", () =>
@@ -18,8 +13,8 @@ describe("Integration tests for the 'getAll' function.", () =>
                 method: "POST",
                 uri: configs.IDENTITY_SERVICE + '?key=' + configs.API_KEY,
                 body: {
-                    email: TEST_USER.email || process.env.TEST_USERNAME,
-                    password: TEST_USER.pw || process.env.TEST_PASSWORD,
+                    email: configs.TEST_USER.EMAIL || process.env.TEST_USERNAME,
+                    password: configs.TEST_USER.PASSWORD || process.env.TEST_PASSWORD,
                     returnSecureToken: true
                 },
                 json: true,
@@ -38,6 +33,6 @@ describe("Integration tests for the 'getAll' function.", () =>
                 }))
                 .then(serviceResponse => assert.notEqual(serviceResponse.length, 0))
                 .catch(error => assert.fail(error))
-        )
+        ).timeout(10000)
     )
 );
