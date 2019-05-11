@@ -1,7 +1,15 @@
 "use strict"
 
+// Require Firebase Admin SDK.
 const admin = require("firebase-admin");
 
+/**
+ * Gateway check for authenticated users.
+ * If pass, then fetch employee info from the Real-Time DataBase.
+ * At the end, resolve with fully-constructed employee info.
+ * 
+ * @returns { Promise }
+ */
 module.exports = (request) =>
     new Promise((resolve, reject) =>
         admin.auth()

@@ -3,12 +3,19 @@
 const assert = require("assert");
 const rp = require("request-promise");
 
+// Import the function to be tested.
 const getOne = require("../../src/getOne");
+
+// Load all needed configs.
 const configs = require("../shared/configs");
 
+/**
+ * Integration test scenaio.
+ * The test execution times-out in 10s.
+ */
 describe("Integration tests for the 'getOne' function.", () =>
     describe("Should test getting an employee from the backend service.", () =>
-        it("Will fetch the employee, and verify that the object has properties.", () =>
+        it("Will fetch the employee, and verify that the response object has properties.", () =>
             rp({
                 method: "POST",
                 uri: configs.IDENTITY_SERVICE + '?key=' + configs.API_KEY,

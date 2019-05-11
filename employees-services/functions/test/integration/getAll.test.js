@@ -3,9 +3,16 @@
 const assert = require("assert");
 const rp = require("request-promise");
 
+// Import the function to be tested.
 const getAll = require("../../src/getAll");
+
+// Load all needed configs.
 const configs = require("../shared/configs");
 
+/**
+ * Integration test scenaio.
+ * The test execution times-out in 10s.
+ */
 describe("Integration tests for the 'getAll' function.", () =>
     describe("Should test getting all the employees from the backend service.", () =>
         it("Will fetch all the employees, and verify that the response array length is greater than zero.", () =>
